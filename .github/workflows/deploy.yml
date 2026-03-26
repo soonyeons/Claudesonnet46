@@ -1,0 +1,63 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Build
+        run: npm run build
+      
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+```
+
+---
+
+### **5단계: Commit**
+
+아래에서:
+- **Commit message:** `Add GitHub Actions deployment workflow`
+- **"Commit new file"** 클릭
+
+---
+
+### **6단계: 배포 시작 확인**
+
+1. **Actions** 탭 클릭
+2. 파란색 진행 표시 보이면 성공! 🎉
+3. 약 5분 후 완료
+
+---
+
+## **시각적으로:**
+```
+저장소 페이지
+    ↓
+"Code" 버튼 우측에 "Add file" ▼ 클릭
+    ↓
+"Create new file" 선택
+    ↓
+파일 경로: .github/workflows/deploy.yml 입력
+    ↓
+코드 붙여넣기
+    ↓
+"Commit new file" 클릭
+    ↓
+✅ 완료!
